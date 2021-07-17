@@ -2,6 +2,8 @@ import express from 'express'
 import expressWs from 'express-ws'
 
 import { readFileSync } from 'fs'
+import emojis from '../lib/emojis'
+import findClosest from '../lib/findClosest'
 
 import State from '../Classes/State'
 
@@ -19,7 +21,7 @@ app.ws('/ws', (ws, req) => {
 })
 
 app.get('/emoji', (_, res) => {
-  res.send('😆')
+  res.send(findClosest(emojis, state.emotions).emoji)
 })
 
 app.get('/quotes/:type/:message', (req, res) => {
