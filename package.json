@@ -1,0 +1,22 @@
+{
+  "name": "isla",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^16.3.3",
+    "express": "^4.17.1",
+    "express-ws": "^5.0.2",
+    "ws": "^7.5.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/express-ws": "^3.0.1",
+    "@types/ws": "^7.4.6"
+  }
+}
