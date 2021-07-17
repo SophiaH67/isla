@@ -1,4 +1,4 @@
-import findClosestQuote from '../lib/closestQuote'
+import findClosest from '../lib/findClosest'
 import { errorQuotes, successQuotes } from '../lib/quotes'
 import Emotions from '../interfaces/Emotions'
 
@@ -12,10 +12,10 @@ export default class State {
   }
 
   public errorQuote = (message: string) => {
-    return findClosestQuote(errorQuotes, this.emotions).text.replace('{}', message)
+    return findClosest(errorQuotes, this.emotions).text.replace('{}', message)
   }
 
   public successQuote = (message: string) => {
-    return findClosestQuote(successQuotes, this.emotions).text.replace('{}', message)
+    return findClosest(successQuotes, this.emotions).text.replace('{}', message)
   }
 }
