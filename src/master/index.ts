@@ -2,6 +2,7 @@ import express from 'express'
 import expressWs from 'express-ws'
 
 import { readFileSync } from 'fs'
+import { writeFile } from 'fs/promises'
 import emojis from '../lib/emojis'
 import findClosest from '../lib/findClosest'
 
@@ -13,13 +14,17 @@ expressWs(app)
 
 let state: State
 try {
-  state = new State(JSON.parse(readFileSync('./state.json').toString()))
+  state = new State(JSON.parse(readFileSync('./config/state.json').toString()))
 } catch (e) {
   state = new State({
     emotions: { focusLevel: 0.5, frustration: 0.5 },
     lifespanEnd: new Date(new Date().getTime() + 2000 * 60 * 60 * 1000).toUTCString(),
   })
 }
+
+const saveSate = () => writeFile('./config/state.json', JSON.stringify(State))
+setInterval(saveSate, 5 * 60 * 1000)
+saveSate()
 
 app.ws('/ws', (ws, req) => {
   console.log(`[isla]: handling request from ${req.ip}`)
