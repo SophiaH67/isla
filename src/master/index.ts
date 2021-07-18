@@ -11,7 +11,15 @@ const { app } = expressWs(express())
 
 expressWs(app)
 
-const state = new State(JSON.parse(readFileSync('./state.json').toString()))
+let state: State
+try {
+  state = new State(JSON.parse(readFileSync('./state.json').toString()))
+} catch (e) {
+  state = new State({
+    emotions: { focusLevel: 0.5, frustration: 0.5 },
+    lifespanEnd: new Date(new Date().getTime() + 2000 * 60 * 60 * 1000).toUTCString(),
+  })
+}
 
 app.ws('/ws', (ws, req) => {
   console.log(`[isla]: handling request from ${req.ip}`)
