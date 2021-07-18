@@ -22,7 +22,7 @@ try {
   })
 }
 
-const saveSate = () => writeFile('./config/state.json', JSON.stringify(State))
+const saveSate = () => writeFile('./config/state.json', JSON.stringify(state))
 setInterval(saveSate, 5 * 60 * 1000)
 saveSate()
 
