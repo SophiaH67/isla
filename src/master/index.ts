@@ -37,6 +37,10 @@ app.get('/emoji', (_, res) => {
   res.send(findClosest(emojis, state.emotions).emoji)
 })
 
+app.get('/status', (_, res) => {
+  res.send(JSON.stringify(state)).end()
+})
+
 app.get('/quotes/:type/:message', (req, res) => {
   switch (req.params.type) {
     case 'error':
