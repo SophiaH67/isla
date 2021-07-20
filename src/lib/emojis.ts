@@ -1,4 +1,4 @@
-import Emoji from 'src/interfaces/Emoji'
+import Emoji from '../interfaces/Emoji'
 
 const emojis: Emoji[] = [
   { emotions: { focusLevel: 0.4, frustration: 0.8 }, emoji: '😣' },

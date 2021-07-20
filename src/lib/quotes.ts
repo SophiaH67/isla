@@ -1,4 +1,4 @@
-import Quote from 'src/interfaces/Quote'
+import Quote from '../interfaces/Quote'
 
 export const errorQuotes: Quote[] = [
   { emotions: { focusLevel: 0.2, frustration: 0.8 }, text: 'フムフム。' },
