@@ -40,10 +40,10 @@ app.get('/emoji', (_, res) => {
 app.get('/quotes/:type/:message', (req, res) => {
   switch (req.params.type) {
     case 'error':
-      state.changeFrustration(-Math.random())
+      state.changeFrustration(+Math.random())
       return res.send(state.errorQuote(req.params.message)).end()
     case 'success':
-      state.changeFrustration(+Math.random())
+      state.changeFrustration(-Math.random())
       return res.send(state.successQuote(req.params.message)).end()
     default:
       return res.send('Wakaranai...').end()
