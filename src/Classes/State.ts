@@ -18,4 +18,7 @@ export default class State {
   public successQuote = (message: string) => {
     return findClosest(successQuotes, this.emotions).text.replace('{}', message)
   }
+
+  public changeFrustration = (amount: number) =>
+    (this.emotions.frustration = Math.max(-1, Math.min(1, this.emotions.frustration + amount)))
 }
