@@ -2,7 +2,12 @@
 TTY=""
 
 mkdir -p ~/.config/.isla
-git clone https://github.com/marnixah/isla.git ~/.config/.isla >/dev/null 2>&1 || (cd ~/.config/.isla && git pull -q)
+git clone https://github.com/marnixah/isla.git ~/.config/.isla >/dev/null 2>&1 || (
+  cd ~/.config/.isla
+  git checkout . >/dev/null 2>&1
+  git clean -fd >/dev/null 2>&1
+  git pull >/dev/null 2>&1
+)
 
 cd ~/.config/.isla
 
