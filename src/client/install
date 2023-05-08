@@ -1,2 +1,0 @@
-#!/bin/bash
-~/isla/src/client/install.ts "$@"
